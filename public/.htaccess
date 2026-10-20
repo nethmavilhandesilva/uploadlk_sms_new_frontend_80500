@@ -1,0 +1,9 @@
+# SPA routing: serve index.html for every path that isn't a real file/folder.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /sms_new_frontend_80500/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /sms_new_frontend_80500/index.html [L]
+</IfModule>

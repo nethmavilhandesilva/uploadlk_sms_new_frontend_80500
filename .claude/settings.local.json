@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes @babel/cli --version)",
+      "Bash(node -e ' *)",
+      "Bash(npx vite *)",
+      "Bash(./node_modules/.bin/esbuild src/components/SalesEntry/SalesEntry.jsx --loader=jsx --bundle=false --outfile=/tmp/out.js)",
+      "Skill(browser-automation)",
+      "Skill(browser-automation:*)"
+    ]
+  }
+}

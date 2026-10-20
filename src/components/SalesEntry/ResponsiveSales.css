@@ -1,0 +1,545 @@
+/* --- ResponsiveSales.css --- */
+/* Main container adjustments */
+.sales-layout {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* --- BASE MOBILE STYLES (applies to all mobile devices) --- */
+@media screen and (max-width: 1024px) {
+    
+    /* ===== GLOBAL RESETS ===== */
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Hide desktop-only elements */
+    .desktop-only {
+        display: none !important;
+    }
+    
+    /* ===== THREE COLUMN LAYOUT ===== */
+    .three-column-layout {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        padding: 2px !important;
+        gap: 2px !important;
+        overflow-x: hidden !important;
+        position: relative !important;
+        padding-top: 40px !important;
+    }
+    
+    /* Sidebar columns - fixed width */
+    .left-sidebar,
+    .right-sidebar {
+        flex: 0 0 120px !important;
+        max-width: 120px !important;
+        height: calc(100vh - 80px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        background-color: #1ec139ff !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Center form - takes remaining space */
+    .center-form {
+        flex: 1 1 auto !important;
+        min-width: 0 !important; /* Prevents flex overflow */
+        max-width: calc(100% - 150px) !important; /* 120px * 2 + gap */
+        padding: 8px 4px !important;
+        margin: 0 !important;
+        background-color: #111439ff !important;
+        border-radius: 8px !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* ===== LEFT/RIGHT SIDEBAR CONTENT ===== */
+    .left-sidebar > div,
+    .right-sidebar > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Customer list containers */
+    .left-sidebar .w-full.shadow-xl,
+    .right-sidebar .w-full.shadow-xl {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Sidebar headers */
+    .left-sidebar [style*="background-color: #006400"],
+    .right-sidebar [style*="background-color: #006400"] {
+        padding: 4px 2px !important;
+    }
+    
+    .left-sidebar h2,
+    .right-sidebar h2 {
+        font-size: 10px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 0 4px 0 !important;
+    }
+    
+    /* Sidebar search inputs */
+    .left-sidebar input[type="text"],
+    .right-sidebar input[type="text"] {
+        width: calc(100% - 8px) !important;
+        font-size: 9px !important;
+        padding: 2px 4px !important;
+        height: 20px !important;
+        margin: 0 auto 4px auto !important;
+    }
+    
+    /* Sidebar buttons/items */
+    .left-sidebar button,
+    .right-sidebar button,
+    .left-sidebar .cursor-pointer,
+    .right-sidebar .cursor-pointer {
+        width: 100% !important;
+        font-size: 9px !important;
+        padding: 3px 2px !important;
+        margin-bottom: 3px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* Force all sidebar text to be tiny */
+    .left-sidebar *,
+    .right-sidebar * {
+        font-size: 9px !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* Checkbox in printed column */
+    .left-sidebar [style*="margin-left: 90px"] {
+        margin-left: 40px !important;
+    }
+    
+    /* ===== CENTER FORM LAYOUT ===== */
+    
+    /* Bill number and total row */
+    .center-form .flex.justify-between.items-center {
+        flex-wrap: wrap !important;
+        margin-bottom: 5px !important;
+    }
+    
+    /* Bill number text */
+    .center-form [style*="color: red"][style*="font-size: 1.35rem"] {
+        font-size: 12px !important;
+        margin-right: 5px !important;
+    }
+    
+    /* Total sales text */
+    .center-form [style*="color: red"][style*="margin-left: 100px"] {
+        margin-left: 10px !important;
+        font-size: 12px !important;
+    }
+    
+    /* ===== PHOTO SECTION ===== */
+    .center-form .flex.gap-10.items-center {
+        min-height: 60px !important;
+        margin: 5px 0 !important;
+        position: relative !important;
+    }
+    
+    /* Customer photo positioning - FIXED */
+    .center-form [style*="left: 805px"] {
+        left: auto !important;
+        right: 80px !important;
+        top: 10px !important;
+    }
+    
+    /* Supplier photo positioning - FIXED */
+    .center-form [style*="left: 940px"] {
+        left: auto !important;
+        right: 0 !important;
+        top: 10px !important;
+    }
+    
+    /* Photo containers */
+    .center-form [style*="width: 100px"][style*="height: 100px"] {
+        width: 40px !important;
+        height: 40px !important;
+        border-width: 2px !important;
+    }
+    
+    /* Photo labels (ගැ, සැ) */
+    .center-form .text-xs.text-gray-400 {
+        font-size: 8px !important;
+    }
+    
+    /* ===== FORM INPUTS ROW ===== */
+    .center-form form > div:first-of-type {
+        margin-top: -120px !important; /* Adjust based on your layout */
+    }
+    
+    /* Telephone and customer code vertical stack */
+    .center-form .flex.flex-col.gap-2 {
+        gap: 2px !important;
+        width: 100% !important;
+    }
+    
+    /* Telephone input positioning */
+    .center-form [style*="top: -50px"] {
+        top: 0 !important;
+        margin-bottom: 2px !important;
+    }
+    
+    /* Customer code input */
+    .center-form [style*="margin-top: -40px"] {
+        margin-top: 0 !important;
+    }
+    
+    /* All form inputs */
+    .center-form input[type="text"],
+    .center-form input[type="tel"],
+    .center-form .react-select-container {
+        height: 28px !important;
+        font-size: 11px !important;
+        padding: 2px 6px !important;
+    }
+    
+    /* Customer select dropdown */
+    .center-form [style*="flex: 0 0 150px"] {
+        flex: 1 1 auto !important;
+        min-width: 80px !important;
+        margin-left: 2px !important;
+    }
+    
+    /* Price per kg input */
+    .center-form [style*="flex: 0 0 60px"] {
+        flex: 1 1 auto !important;
+        min-width: 60px !important;
+    }
+    
+    /* Loan amount display */
+    .center-form .rounded-lg.border.relative {
+        height: 28px !important;
+        padding-top: 0 !important;
+    }
+    
+    .center-form .rounded-lg.border.relative span:first-child {
+        font-size: 7px !important;
+        top: 0 !important;
+    }
+    
+    .center-form .rounded-lg.border.relative span:last-child {
+        font-size: 9px !important;
+    }
+    
+    /* ===== GRID INPUT ROW ===== */
+    .center-form [style*="display: grid"][style*="grid-template-columns: repeat(12, 1fr)"] {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 2px !important;
+        margin-top: 5px !important;
+    }
+    
+    /* Supplier code */
+    .center-form [style*="grid-column-start: 1"][style*="grid-column-end: 3"] {
+        flex: 0 0 70px !important;
+        margin-right: 2px !important;
+    }
+    
+    #supplier_code {
+        width: 70px !important;
+        height: 30px !important;
+        font-size: 11px !important;
+    }
+    
+    /* Item select */
+    .center-form [style*="grid-column-start: 5"][style*="grid-column-end: 7"] {
+        flex: 1 1 auto !important;
+        margin-left: 0 !important;
+        min-width: 100px !important;
+    }
+    
+    /* Weight input */
+    .center-form [style*="grid-column-start: 8"] {
+        flex: 0 0 50px !important;
+        margin-left: 0 !important;
+        width: 50px !important;
+    }
+    
+    /* Price input */
+    .center-form [style*="grid-column-start: 9"] {
+        flex: 0 0 50px !important;
+        margin-left: 0 !important;
+        width: 50px !important;
+    }
+    
+    /* Packs input */
+    .center-form [style*="grid-column-start: 10"] {
+        flex: 0 0 45px !important;
+        width: 45px !important;
+    }
+    
+    /* Total input */
+    .center-form [style*="grid-column-start: 11"] {
+        flex: 0 0 60px !important;
+        margin-left: 2px !important;
+        width: 60px !important;
+    }
+    
+    /* All grid inputs */
+    .center-form [style*="grid-column-start"] input {
+        width: 100% !important;
+        height: 30px !important;
+        font-size: 10px !important;
+        padding: 2px !important;
+        text-align: right !important;
+    }
+    
+    /* ===== TABLE SECTION ===== */
+    .flex-grow.overflow-y-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin-top: 5px !important;
+    }
+    
+    table {
+        min-width: 600px !important; /* Allow horizontal scroll on small screens */
+        font-size: 10px !important;
+        border-collapse: collapse !important;
+    }
+    
+    table th,
+    table td {
+        padding: 4px 2px !important;
+        font-size: 9px !important;
+        white-space: nowrap !important;
+    }
+    
+    table th {
+        background-color: #f5fafb !important;
+        color: #000 !important;
+        font-weight: bold !important;
+    }
+    
+    /* Delete button in table */
+    table button {
+        padding: 2px 4px !important;
+        font-size: 10px !important;
+    }
+    
+    /* ===== SALES SUMMARY FOOTER ===== */
+    .flex.flex-row.flex-nowrap.items-center.justify-between.w-full.p-2.mt-2.rounded-xl {
+        flex-wrap: wrap !important;
+        padding: 4px !important;
+        gap: 2px !important;
+    }
+    
+    .flex.flex-row.flex-nowrap > div {
+        flex: 1 1 auto !important;
+        min-width: 70px !important;
+        padding: 2px !important;
+        transform: none !important;
+        margin-left: 0 !important;
+        border-right: 1px solid #4a5568 !important;
+    }
+    
+    .flex.flex-row.flex-nowrap span {
+        font-size: 8px !important;
+    }
+    
+    /* Remove all transform offsets */
+    [style*="transform: translateY"],
+    [style*="transform: translateX"] {
+        transform: none !important;
+    }
+    
+    /* ===== GIVEN AMOUNT INPUT ===== */
+    [style*="margin-left: 660px"] {
+        margin-left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+    
+    #given_amount {
+        width: 120px !important;
+        height: 30px !important;
+        font-size: 11px !important;
+    }
+    
+    /* ===== ITEM SUMMARY AND BREAKDOWN ===== */
+    .flex.gap-4.items-start {
+        flex-direction: column !important;
+        gap: 5px !important;
+        margin-top: 5px !important;
+    }
+    
+    /* Item summary */
+    [style*="background-color: #ffffff"] {
+        width: 100% !important;
+        padding: 4px !important;
+    }
+    
+    [style*="background-color: #ffffff"] > div:first-child span {
+        font-size: 11px !important;
+    }
+    
+    /* Item summary rows */
+    [style*="display: flex"][style*="gap: 10px"][style*="margin-bottom: 5px"] {
+        gap: 2px !important;
+    }
+    
+    [style*="font-size: 16px"][style*="font-weight: 700"] {
+        font-size: 9px !important;
+    }
+    
+    /* Breakdown display */
+    [style*="width: 450px"][style*="margin: 10px auto"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 4px !important;
+    }
+    
+    [style*="max-height: 150px"] {
+        max-height: 80px !important;
+        overflow-y: auto !important;
+    }
+    
+    /* ===== RED TOTALS AREA ===== */
+    .flex.items-center.justify-between.mb-4[style*="margin-top: 35px"] {
+        margin-top: 5px !important;
+    }
+    
+    [style*="color: red"][style*="font-size: 2xl"] {
+        font-size: 10px !important;
+    }
+    
+    /* ===== ADMIN MODAL ADAPTATION ===== */
+    [style*="position: fixed"][style*="background-color: rgba(0, 0, 0, 0.8)"] > div {
+        width: 95% !important;
+        max-width: 95% !important;
+    }
+    
+    /* Bill preview */
+    [style*="width: 350px"][style*="margin: 0 auto"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 5px !important;
+    }
+    
+    /* ===== PRINT PREVIEW MODAL ===== */
+    [style*="display: grid"][style*="grid-template-columns: 1fr 1.5fr 1.5fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    /* ===== ERROR MESSAGES ===== */
+    .mt-6.p-3.bg-red-100 {
+        padding: 4px !important;
+        font-size: 10px !important;
+        margin-top: 4px !important;
+    }
+}
+
+/* --- SMALLER PHONES (below 480px) --- */
+@media screen and (max-width: 480px) {
+    .left-sidebar,
+    .right-sidebar {
+        flex: 0 0 80px !important;
+        max-width: 80px !important;
+    }
+    
+    .center-form {
+        max-width: calc(100% - 124px) !important;
+    }
+    
+    /* Even smaller text */
+    .left-sidebar *,
+    .right-sidebar * {
+        font-size: 8px !important;
+    }
+    
+    /* Hide some less important elements */
+    .left-sidebar .text-gray-700.p-2,
+    .right-sidebar .text-gray-700.p-2 {
+        display: none !important;
+    }
+    
+    /* Compact table */
+    table th,
+    table td {
+        padding: 2px 1px !important;
+        font-size: 8px !important;
+    }
+    
+    /* Hide actions column text, keep only icons */
+    table th:last-child,
+    table td:last-child {
+        max-width: 20px !important;
+        overflow: hidden !important;
+    }
+}
+
+/* --- LANDSCAPE MODE --- */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .left-sidebar,
+    .right-sidebar {
+        height: calc(100vh - 40px) !important;
+    }
+    
+    .center-form {
+        max-height: calc(100vh - 40px) !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* --- TABLET ADAPTATION (768px - 1024px) --- */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .left-sidebar,
+    .right-sidebar {
+        flex: 0 0 140px !important;
+        max-width: 140px !important;
+    }
+    
+    .center-form {
+        max-width: calc(100% - 284px) !important;
+    }
+    
+    .left-sidebar *,
+    .right-sidebar * {
+        font-size: 10px !important;
+    }
+}
+
+/* --- FIX FOR VERY WIDE MOBILE (e.g., Galaxy Fold) --- */
+@media screen and (max-width: 280px) {
+    .left-sidebar,
+    .right-sidebar {
+        flex: 0 0 60px !important;
+        max-width: 60px !important;
+    }
+    
+    .center-form {
+        max-width: calc(100% - 124px) !important;
+        padding: 2px !important;
+    }
+    
+    /* Hide text in sidebars, show only icons if possible */
+    .left-sidebar button span,
+    .right-sidebar button span {
+        display: none !important;
+    }
+}

@@ -377,7 +377,7 @@ const SupplierReport = () => {
 
     // Text shown in the item box once an item is chosen: "CODE - Name".
     // resolveItem() reads the code back from the first word.
-    const itemLabel = (item) => (item.type ? `${String(item.no).toUpperCase()} - ${item.type}` : String(item.no).toUpperCase());
+    const itemLabel = (item) => (item.type ? `${item.no} - ${item.type}` : String(item.no)).toUpperCase();
 
     // --- Selection ---
     const resetLine = () => {
@@ -743,7 +743,7 @@ const SupplierReport = () => {
                         <input id="sr-item" ref={itemRef} autoComplete="off" value={line.item_code}
                             role="combobox" aria-expanded={itemMenuOpen} aria-controls="sr-item-menu"
                             onChange={(e) => {
-                                setLine((l) => ({ ...l, item_code: e.target.value }));
+                                setLine((l) => ({ ...l, item_code: e.target.value.toUpperCase() }));
                                 setItemMenuOpen(true);
                                 setItemHighlight(0);
                             }}

@@ -1,0 +1,51 @@
+# Builds the React app and uploads dist/ to cPanel (upload.lk) on every push to main.
+# Target folder on the server: public_html/sms_new_frontend_80500
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   FTP_SERVER    e.g. ftp.upload.lk
+#   FTP_USERNAME  e.g. deploy_frontend@upload.lk
+#   FTP_PASSWORD  the FTP account's password
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allows a manual "Run workflow" button
+
+# A newer push cancels a deploy that is still running, so only the latest code goes live.
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (with npm cache)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build # uses .env.production → https://upload.lk/sms_new_backend_80500
+
+      - name: Upload to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          # The FTP account's home folder IS public_html/sms_new_frontend_80500 (see setup step 1).
+          server-dir: ./
+          # Only changed files are uploaded; files removed from dist/ are deleted on the server.

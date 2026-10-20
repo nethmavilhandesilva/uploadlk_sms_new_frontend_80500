@@ -59,7 +59,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Transport from './components/Reports/Transport';
 import SupplierVikunumReport from './components/Suppliers/suppliervikunumreport';
 import AdvanceReport from './components/Reports/advancereport';
-import ChequeReport from './components/Reports/ChequeReport';
+import ChequeReport from './components/Reports/chequereport';
 import ChequeReport2 from './components/Reports/chequereport2';
 import HoldBillsDeletedRecords from './components/Reports/holdbillsdeletetedrecords';
 import { BASE_PATH } from './config';

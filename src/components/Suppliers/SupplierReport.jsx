@@ -375,6 +375,10 @@ const SupplierReport = () => {
             || null;
     };
 
+    // Text shown in the item box once an item is chosen: "CODE - Name".
+    // resolveItem() reads the code back from the first word.
+    const itemLabel = (item) => (item.type ? `${String(item.no).toUpperCase()} - ${item.type}` : String(item.no).toUpperCase());
+
     // --- Selection ---
     const resetLine = () => {
         setLine({ item_code: '', weight: '', price_per_kg: '' });
@@ -488,7 +492,8 @@ const SupplierReport = () => {
 
     const startEdit = (record) => {
         setEditingId(record.id);
-        setLine({ item_code: String(record.item_code), weight: String(record.weight), price_per_kg: String(record.price_per_kg) });
+        const recordItem = resolveItem(record.item_code);
+        setLine({ item_code: recordItem ? itemLabel(recordItem) : String(record.item_code), weight: String(record.weight), price_per_kg: String(record.price_per_kg) });
         focus(weightRef);
     };
 
@@ -556,7 +561,7 @@ const SupplierReport = () => {
             const item = resolveItem(line.item_code);
             if (!item) { flash('error', 'අයිතමය හමු නොවීය (Item not found)'); return; }
             setStatus({ type: '', text: '' });
-            setLine((l) => ({ ...l, item_code: String(item.no) }));
+            setLine((l) => ({ ...l, item_code: itemLabel(item) }));
             focus(weightRef);
         }
         if (field === 'weight') focus(priceRef);
@@ -565,7 +570,7 @@ const SupplierReport = () => {
 
     // --- Item dropdown: codes starting with what was typed; ↑/↓ to move, Enter to pick ---
     const pickItem = (item) => {
-        setLine((l) => ({ ...l, item_code: String(item.no) }));
+        setLine((l) => ({ ...l, item_code: itemLabel(item) }));
         setItemMenuOpen(false);
         setStatus({ type: '', text: '' });
         focus(weightRef);
@@ -616,7 +621,8 @@ const SupplierReport = () => {
     const currentItem = resolveItem(line.item_code);
 
     const itemMatches = useMemo(() => {
-        const q = line.item_code.trim().toUpperCase();
+        // Filter on the code part only, so "A - Apple" still matches items starting with A.
+        const q = line.item_code.trim().toUpperCase().split(' ')[0];
         if (!q) return items;
         return items.filter((i) => String(i.no).toUpperCase().startsWith(q));
     }, [line.item_code, items]);

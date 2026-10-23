@@ -8,7 +8,6 @@ const CreateSupplier = () => {
     code: '',
     name: '',
     address: '',
-    dob: '',
     telephone_no: '',   // ✅ NEW FIELD ADDED
     profile_pic: null,
     nic_front: null,
@@ -70,7 +69,6 @@ const CreateSupplier = () => {
     data.append('code', formData.code);
     data.append('name', formData.name);
     data.append('address', formData.address);
-    data.append('dob', formData.dob);
     data.append('telephone_no', formData.telephone_no); // ✅ APPENDED
 
     if (formData.profile_pic) data.append('profile_pic', formData.profile_pic);
@@ -146,18 +144,6 @@ const CreateSupplier = () => {
                   />
                 </div>
 
-                {/* Date of Birth */}
-                <div className="col-md-6 mb-4">
-                  <label className="form-label fs-5 text-light">උපන් දිනය (Date of Birth)</label>
-                  <input
-                    type="date"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    className="form-control form-control-lg"
-                    required
-                  />
-                </div>
 
                 {/* Address */}
                 <div className="col-12 mb-4">

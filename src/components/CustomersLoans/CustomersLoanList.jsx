@@ -4,6 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import CreateCustomerLoan from './CreateCustomerLoan';
 import CustomerOpeningBalances from './CustomerOpeningBalances';
 
+// Full-width overrides for this screen only (body is a centered flex box globally,
+// which shrinks the page to its content width).
+const CLM_CSS = `
+body.clm-full { display: block !important; place-items: initial !important; }
+body.clm-full #root { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+body.clm-full main { max-width: 100% !important; width: 100% !important; padding-left: 12px !important; padding-right: 12px !important; }
+.clm-page { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+.clm-page > .card { width: 100%; border: none; border-radius: 10px; }
+.clm-page .card-body { padding: 20px 24px; }
+.clm-page #loan-form-section > div { width: 100%; }
+.clm-page .table-responsive { width: 100%; }
+.clm-page table { width: 100% !important; margin-bottom: 0; }
+.clm-page table thead th { background: #002e00; color: #fff; white-space: nowrap; }
+`;
+
 const CustomersLoanList = () => {
     const [loans, setLoans] = useState([]);
     const [customers, setCustomers] = useState([]);
@@ -16,6 +31,11 @@ const CustomersLoanList = () => {
 
     useEffect(() => {
         loadData();
+    }, []);
+
+    useEffect(() => {
+        document.body.classList.add('clm-full');
+        return () => document.body.classList.remove('clm-full');
     }, []);
 
     const loadData = async () => {
@@ -64,7 +84,8 @@ const CustomersLoanList = () => {
     }
 
     return (
-        <div className="container-fluid mt-4">
+        <div className="clm-page mt-2">
+            <style>{CLM_CSS}</style>
             <div className="card" style={{ backgroundColor: '#004d00', color: '#fff' }}>
                 <div className="card-body">
                     {message && (

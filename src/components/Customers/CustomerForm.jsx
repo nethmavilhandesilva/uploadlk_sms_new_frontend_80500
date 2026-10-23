@@ -1,9 +1,40 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { API_BASE_URL, STORAGE_URL } from '../../config';
+import { useNavigate, useParams } from "react-router-dom";
+import api from "../../api";
+import { API_BASE_URL } from '../../config';
 
-export default function CustomerForm({ customer, onSubmit, onCancel }) {
+export default function CustomerForm({ customer: customerProp, onSubmit: onSubmitProp, onCancel: onCancelProp, mode }) {
+  const navigate = useNavigate();
+  const { id: routeId } = useParams();
+  const [loadedCustomer, setLoadedCustomer] = useState(null);
+  const customer = customerProp ?? loadedCustomer;
+
+  // When rendered directly by a route (no parent handlers), load/save via API
+  useEffect(() => {
+    if (customerProp || mode !== "edit" || !routeId) return;
+    api.get(`/customers/${routeId}`)
+      .then((res) => setLoadedCustomer(res.data?.data ?? res.data))
+      .catch((err) => console.error("Failed to load customer:", err));
+  }, [customerProp, mode, routeId]);
+
+  const onSubmit = onSubmitProp ?? (async (data, id) => {
+    try {
+      if (id) {
+        await api.post(`/customers/update/${id}`, data);
+      } else {
+        await api.post("/customers", data);
+      }
+      alert("සාර්ථකව සුරැකිණි!");
+      navigate("/customers");
+    } catch (err) {
+      console.error("Failed to save customer:", err);
+      alert("දෝෂයක් සිදු විය.");
+    }
+  });
+
+  const onCancel = onCancelProp ?? (() => navigate("/customers"));
 
   const initialState = {
     short_name: "",
@@ -24,9 +55,6 @@ export default function CustomerForm({ customer, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const STORAGE_URL =
-    STORAGE_URL;
 
   // ================= LOAD DATA FOR EDIT =================
   useEffect(() => {
